@@ -11,7 +11,12 @@ class LoadedPage extends Component {
   }
 
   render() {
-    console.log(this.props.park)
+    console.log(`this.props.park is` + this.props.park)
+    if (!this.props.park) {
+      return (
+        <div>Loading...</div>
+      )
+    }
     return (
       <main>
         <h2>Your next trip will be to...</h2>
@@ -20,7 +25,7 @@ class LoadedPage extends Component {
           <p>{this.props.park.description}</p>
         </div>
         <div id="cost" className="module">
-          <p>{this.props.park.entrancePasses[0].title}</p>
+          <p>{this.props.park.entranceFees[0].title}</p>
           {/* <p>{this.props.park.entranceFees[0]}</p> */}
         </div>
         <div id="address" className="module">
