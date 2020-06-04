@@ -14,7 +14,9 @@ class LoadedPage extends Component {
     console.log(`this.props.park is` + this.props.park)
     if (!this.props.park) {
       return (
-        <div>Loading...</div>
+        <main>
+          <h1>Loading...</h1>
+        </main>
       )
     }
     return (
@@ -25,8 +27,8 @@ class LoadedPage extends Component {
           <p>{this.props.park.description}</p>
         </div>
         <div id="cost" className="module">
-          <p>{this.props.park.entranceFees[0].title}</p>
-          <p>{this.props.park.entranceFees[0].cost}</p>
+          <h3>{this.props.park.entranceFees[0].title}</h3>
+          <p>${this.props.park.entranceFees[0].cost}</p>
         </div>
         <div id="address" className="module">
           <p>Address</p>
@@ -36,7 +38,7 @@ class LoadedPage extends Component {
           <p>{this.props.park.weatherInfo}</p>
         </div>
         <div id="hours" className="module">
-          <p>Hours</p>
+          <h3>Hours</h3>
           <ul>
             <li>Sunday: {this.props.park.operatingHours[0].standardHours.sunday}</li>
             <li>Monday: {this.props.park.operatingHours[0].standardHours.monday}</li>
