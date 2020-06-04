@@ -32,7 +32,7 @@ class LoadedPage extends Component {
         <p>Nat'l Parks Trip Planner</p>
         <button>Generate Next Trip</button>
       </nav>
-      
+
         <main>
 
           <h2>Your next trip will be to...</h2>
@@ -41,18 +41,19 @@ class LoadedPage extends Component {
             <p>{this.props.park.description}</p>
           </div>
           <div id="cost" className="module">
-            <p>{this.props.park.entranceFees[0].title}</p>
-            <p>{this.props.park.entranceFees[0].cost}</p>
+            <h3>{this.props.park.entranceFees[0].title}</h3>
+            <p>${this.props.park.entranceFees[0].cost}</p>
           </div>
           <div id="address" className="module">
-            <p>Address</p>
+            <h3>Address</h3>
+            <p>Stuff goes here</p>
           </div>
           <div id="weather" className="module">
             <h3>Weather Info</h3>
             <p>{this.props.park.weatherInfo}</p>
           </div>
           <div id="hours" className="module">
-            <p>Hours</p>
+            <h3>Hours</h3>
             <ul>
               <li>Sunday: {this.props.park.operatingHours[0].standardHours.sunday}</li>
               <li>Monday: {this.props.park.operatingHours[0].standardHours.monday}</li>
@@ -63,12 +64,14 @@ class LoadedPage extends Component {
               <li>Saturday: {this.props.park.operatingHours[0].standardHours.saturday}</li>
             </ul>
           </div>
-          <h2>Upcoming Events</h2>
-          <ul>
-            <li>Event Item</li>
-          </ul>
+          <div id="events">
+            <h2>Upcoming Events</h2>
+            <ul>
+              <li>Event Item</li>
+            </ul>
+          </div>
         </main>
-        
+
       </div>
     )
   }
