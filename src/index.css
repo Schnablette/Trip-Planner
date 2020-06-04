@@ -51,6 +51,20 @@ h1 {
   color: var(--main-color)
 }
 
+#index-button {
+  background-color: var(--main-color);
+  font-size: 1.5em;
+  color: white;
+  padding: 15px;
+  width: 40%;
+  border-radius: 10px;
+  margin: 100px 30%;
+}
+
+#index-button:hover {
+  background-color: var(--light-color);
+}
+
 .module {
   background-color: var(--main-color);
   border-radius: 10px;
