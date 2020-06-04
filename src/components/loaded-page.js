@@ -1,9 +1,13 @@
 import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { fetchParkInformation } from "../actions";
 
 class LoadedPage extends Component {
   componentDidMount() {
     const { parkCode } = this.props.match.params;
-    this.props.fetchPark(parkCode)
+    this.props.fetchParkInformation(parkCode);
+    console.log(this.props.park)
   }
 
   render() {
@@ -36,8 +40,12 @@ class LoadedPage extends Component {
   }
 }
 
+// function mapStateToProps(state, ownProps) {
+//   return { park: state.posts[ownProps.match.params.id] };
+// }
+
 function mapDispatchToProp(dispatch) {
-  return bindActionCreators({fetchPark}, dispatch);
+  return bindActionCreators({fetchParkInformation}, dispatch);
 }
 
-export default LoadedPage
+export default connect(null, mapDispatchToProp)(LoadedPage)
