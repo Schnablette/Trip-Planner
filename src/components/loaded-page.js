@@ -11,17 +11,22 @@ class LoadedPage extends Component {
   }
 
   render() {
-    console.log(this.props.park)
+    console.log(`this.props.park is` + this.props.park)
+    if (!this.props.park) {
+      return (
+        <div>Loading...</div>
+      )
+    }
     return (
       <main>
-        <h2>your next trip will be to</h2>
-        <h1>Acadia</h1>
-        <h2>National Park</h2>
+        <h2>Your next trip will be to...</h2>
+        <h1>{this.props.park.fullName}</h1>
         <div id="description" className="module">
-          <p>Here's where the description will go.</p>
+          <p>{this.props.park.description}</p>
         </div>
         <div id="cost" className="module">
-          <p>Cost</p>
+          <p>{this.props.park.entranceFees[0].title}</p>
+          {/* <p>{this.props.park.entranceFees[0]}</p> */}
         </div>
         <div id="address" className="module">
           <p>Address</p>
@@ -41,7 +46,7 @@ class LoadedPage extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return { park: state.park };
 }
 
