@@ -5,11 +5,23 @@ import { createStore, applyMiddleware } from "redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import promise from "redux-promise";
 
+import LandingPage from "./components/landing-page"
+import LoadedPage from "./components/loaded-page"
+
 import "./index.css"
 
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <h1>Hello World</h1>
-  </React.StrictMode>,
+ // <Provider store={createStoreWithMiddleware(reducers)}>
+    <BrowserRouter>
+      <div>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/:parkCode" component={LoadedPage} />
+        </Switch>
+      </div>
+    </BrowserRouter>,
+  // </Provider>,
   document.getElementById('root')
 );
