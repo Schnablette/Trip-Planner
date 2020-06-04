@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 
 class LoadedPage extends Component {
+  componentDidMount() {
+    const { parkCode } = this.props.match.params;
+    this.props.fetchPark(parkCode)
+  }
+
   render() {
     return (
       <main>
@@ -29,6 +34,10 @@ class LoadedPage extends Component {
       </main>
     )
   }
+}
+
+function mapDispatchToProp(dispatch) {
+  return bindActionCreators({fetchPark}, dispatch);
 }
 
 export default LoadedPage
