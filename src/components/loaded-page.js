@@ -26,16 +26,26 @@ class LoadedPage extends Component {
         </div>
         <div id="cost" className="module">
           <p>{this.props.park.entranceFees[0].title}</p>
-          {/* <p>{this.props.park.entranceFees[0]}</p> */}
+          <p>{this.props.park.entranceFees[0].cost}</p>
         </div>
         <div id="address" className="module">
           <p>Address</p>
         </div>
         <div id="weather" className="module">
-          <p>Weather</p>
+          <h3>Weather Info</h3>
+          <p>{this.props.park.weatherInfo}</p>
         </div>
         <div id="hours" className="module">
           <p>Hours</p>
+          <ul>
+            <li>Sunday: {this.props.park.operatingHours[0].standardHours.sunday}</li>
+            <li>Monday: {this.props.park.operatingHours[0].standardHours.monday}</li>
+            <li>Tuesday: {this.props.park.operatingHours[0].standardHours.tuesday}</li>
+            <li>Wednesday: {this.props.park.operatingHours[0].standardHours.wednesday}</li>
+            <li>Thursday: {this.props.park.operatingHours[0].standardHours.thursday}</li>
+            <li>Friday: {this.props.park.operatingHours[0].standardHours.friday}</li>
+            <li>Saturday: {this.props.park.operatingHours[0].standardHours.saturday}</li>
+          </ul>
         </div>
         <h2>Upcoming Events</h2>
         <ul>
