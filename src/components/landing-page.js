@@ -1,11 +1,31 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom'
 
 class LandingPage extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      redirect: false
+    }
+  }
+
+  pickCode() {
+    const parkCodes = ['shen', 'acad'];
+    this.parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
+    this.setState({redirect: true}, () => console.log(this.state.redirect))
+  }
+
   render() {
-    return (
+    if (this.state.redirect === true) {
+      return (
+        <Redirect to={`/${this.parkCode}`} />
+      )
+    } else return (
       <div>
         <h2>Plan your next getaway by clicking the "generate trip" button</h2>
-        <button id="index-button">Generate Trip</button>
+        <button id="index-button" onClick={this.pickCode.bind(this)}>Generate Trip</button>
       </div>
     )
   }
