@@ -7,10 +7,11 @@ class LoadedPage extends Component {
   componentDidMount() {
     const { parkCode } = this.props.match.params;
     this.props.fetchParkInformation(parkCode);
-    console.log(this.props.park)
+
   }
 
   render() {
+    console.log(this.props.park)
     return (
       <main>
         <h2>your next trip will be to</h2>
@@ -40,12 +41,12 @@ class LoadedPage extends Component {
   }
 }
 
-// function mapStateToProps(state, ownProps) {
-//   return { park: state.posts[ownProps.match.params.id] };
-// }
+function mapStateToProps(state, ownProps) {
+  return { park: state.park };
+}
 
 function mapDispatchToProp(dispatch) {
   return bindActionCreators({fetchParkInformation}, dispatch);
 }
 
-export default connect(null, mapDispatchToProp)(LoadedPage)
+export default connect(mapStateToProps, mapDispatchToProp)(LoadedPage)
