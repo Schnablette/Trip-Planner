@@ -21,7 +21,9 @@ class LoadedPage extends Component {
   render() {
     if (!this.props.park) {
       return (
-        <div>Loading...</div>
+        <main>
+          <h1>Loading...</h1>
+        </main>
       )
     }
     return (
