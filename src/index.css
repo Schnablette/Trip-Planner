@@ -1,13 +1,109 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --main-color: #318C23;
+  --light-color: #C4D9B0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  background-color: ghostwhite;
+}
+
+nav {
+  height: 70px;
+  width: 100%;
+  background-color: var(--main-color);
+  margin-bottom: 100px;
+}
+
+nav p {
+  padding: 20px 0 0 20px;
+  margin: 0;
+  color: white;
+  font-family: "Helvetica", serif;
+  font-size: 1.5em;
+  float: left;
+}
+
+nav button {
+  float: right;
+  padding: 10px;
+  margin: 15px 10px 0 0;
+  border-radius: 10px;
+  color: var(--main-color)
+}
+
+nav button:hover {
+  background-color: var(--light-color)
+}
+
+h2 {
+  font-family: "Helvetica", serif;
+  font-size: 1.5em;
+  font-weight: 100;
+  text-align: center;
+  margin: 0;
+}
+
+h1 {
+  font-size: 5em;
+  text-align: center;
+  margin: 0;
+  color: var(--main-color)
+}
+
+.module {
+  background-color: var(--main-color);
+  border-radius: 10px;
+}
+
+.module p {
+  text-align: center;
+  color: white;
+  font-family: "Helvetica", serif;
+  padding: 15px;
+}
+
+#description {
+  width: 90%;
+  margin: 25px 5% 0 5%;
+}
+
+#cost {
+  width: 30%;
+  margin: 25px 5% 0 5%;
+  float: left;
+}
+
+#address {
+  width: 55%;
+  margin: 25px 5% 0 0;
+  float: left;
+}
+
+#weather {
+  width: 60%;
+  margin: 25px 5% 0 5%;
+  float: left;
+}
+
+#hours {
+  width: 25%;
+  margin: 25px 5% 50px 0;
+  float: left;
+}
+
+li {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+@media only screen and (max-width: 600px) {
+  #hours, #address, #weather, #description, #cost {
+    float: none;
+    width: 90%;
+    margin: 25px 5% 0 5%;
+  }
 }
