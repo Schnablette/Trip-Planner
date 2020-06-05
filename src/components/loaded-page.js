@@ -10,6 +10,13 @@ import MapContainer from './MapContainer'
 
 
 class LoadedPage extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      redirect: false
+    }
+  }
   
   componentDidMount() {
     const { parkCode } = this.props.match.params;
@@ -21,14 +28,12 @@ class LoadedPage extends Component {
   //call this function when the "generate your escape" button is clicked
   updateNationalPark() {
     const parkCodes = ["acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cuva", "drto", "ever", "glac", "grba", "grca", "grsm", "grte", "gumo", "havo", "hosp", "isro", "jotr", "kefj", "kova", "lavo", "maca", "meve", "mora", "noca", "olym", "pefo", "romo", "sagu", "shen", "thro", "viis", "voya", "wica", "yell", "yose", "zion"];
-    const parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
-    this.props.fetchParkInformation(parkCode);
-    this.props.fetchCampSiteInformation(parkCode);
-    this.props.fetchEVENTInformation(parkCode);
-    
-    return (
-      <Redirect to={`/${parkCode}`} />
-    )
+    this.parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
+    this.props.fetchParkInformation(this.parkCode);
+    this.props.fetchCampSiteInformation(this.parkCode);
+    this.props.fetchEVENTInformation(this.parkCode);
+    this.setState({redirect: true})
+
   }
 
   renderLi() {
@@ -43,6 +48,12 @@ class LoadedPage extends Component {
         )
       })
 
+    }
+  }
+
+  pictureValidation() {
+    if (this.props.park.images[1]) {
+      return <img src={`${this.props.park.images[1].url}`}/>
     }
   }
 
@@ -64,10 +75,9 @@ class LoadedPage extends Component {
     }  else {
       return (
         <div>
-            <h3>{this.props.campsite.name}</h3>
-            <p>{this.props.campsite.contacts.phoneNumbers[0].phoneNumber}</p>
-            <p>{this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
-            <p>{this.props.campsite.reservationUrl}</p>
+          <h3>Campsite: {this.props.campsite.name}</h3>
+          <p>Contact the campsite at {this.props.campsite.contacts.phoneNumbers[0].phoneNumber} or at {this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
+          <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
         </div>
       )
     }
@@ -76,7 +86,7 @@ class LoadedPage extends Component {
   renderCampFeeInfo() {
     if (this.props.campsite.total === '0') {
       return (
-        <div></div> 
+        <div></div>
       )
     } else if (!this.props.campsite.fees || !this.props.campsite.fees[0] ) {
       return (
@@ -87,28 +97,31 @@ class LoadedPage extends Component {
     } else {
       return (
         <div>
-            <p>{this.props.campsite.fees[0].cost}</p>
-            <p>{this.props.campsite.fees[0].description}</p>
+           <p>Each campsite costs ${Number(this.props.campsite.fees[0].cost)}</p>
+           <p>{this.props.campsite.fees[0].description}</p>
         </div>
       )
-    } 
+    }
   }
 
   render() {
-
     const mapStyles = {
       width: '50%',
       height: '50%',
     };
-
-    if (!this.props.park || !this.props.campsite || !this.props.events) {
+      
+    if (this.state.redirect === true) {
+      this.setState({redirect: false})
+      return (
+        <Redirect to={`/${this.parkCode}`} />
+      )
+    } else if (!this.props.park || !this.props.campsite || !this.props.events) {
       return (
         <main>
           <h1>Loading...</h1>
         </main>
       )
-    }
-    return (
+    } else return (
       <div>
       <nav>
         <p>Escape from 2020</p>
@@ -117,8 +130,11 @@ class LoadedPage extends Component {
 
         <main>
 
-          <h2>Your next trip will be to...</h2>
+          <h2>Your next escape will be to...</h2>
           <h1>{this.props.park.fullName}</h1>
+          <div id="image" className="module">
+            <img src={`${this.props.park.images[0].url}`}/>
+          </div>
           <div id="description" className="module">
             <p>{this.props.park.description}</p>
           </div>
@@ -127,7 +143,6 @@ class LoadedPage extends Component {
             <p>${Number(this.props.park.entranceFees[0].cost)}</p>
           </div>
           <div id="address" className="module">
-            <h3>Campsite</h3>
             {this.renderCampContactInfo()}
             {this.renderCampFeeInfo()}
           </div>
@@ -146,6 +161,13 @@ class LoadedPage extends Component {
               <li>Friday: {this.props.park.operatingHours[0].standardHours.friday}</li>
               <li>Saturday: {this.props.park.operatingHours[0].standardHours.saturday}</li>
             </ul>
+          </div>
+          <div id="weather" className="module">
+            <h3>Weather Info</h3>
+            <p>{this.props.park.weatherInfo}</p>
+          </div>
+          <div id="images">
+            {this.pictureValidation()}
           </div>
           <div id="events">
             <h2>Upcoming Events</h2>
