@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Redirect } from 'react-router-dom'
+
 import { fetchParkInformation, fetchCampSiteInformation, fetchEVENTInformation } from "../actions";
+//import { Map, GoogleApiWrapper } from 'google-maps-react';
+import MapContainer from './MapContainer'
+
+
 
 class LoadedPage extends Component {
   constructor() {
@@ -12,6 +17,7 @@ class LoadedPage extends Component {
       redirect: false
     }
   }
+  
   componentDidMount() {
     const { parkCode } = this.props.match.params;
     this.props.fetchParkInformation(parkCode);
@@ -57,13 +63,13 @@ class LoadedPage extends Component {
         <div>
           <h3>No Campsites Available Right Now</h3>
           <p>Consider AirBnB or find a hotel nearby</p>
-        </div>
+        </div> 
       )
     } else if (!this.props.campsite.contacts.phoneNumbers || !this.props.campsite.contacts.phoneNumbers[0] ||!this.props.campsite.contacts.emailAddresses || !this.props.campsite.contacts.emailAddresses[0]  ) {
       return (
         <div>
-            <h3>Campsite: {this.props.campsite.name}</h3>
-            <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
+            <h3>{this.props.campsite.name}</h3>
+            <p>{this.props.campsite.reservationUrl}</p>
         </div>
       )
     }  else {
@@ -91,14 +97,19 @@ class LoadedPage extends Component {
     } else {
       return (
         <div>
-            <p>Each campsite costs ${Number(this.props.campsite.fees[0].cost)}</p>
-            <p>{this.props.campsite.fees[0].description}</p>
+           <p>Each campsite costs ${Number(this.props.campsite.fees[0].cost)}</p>
+           <p>{this.props.campsite.fees[0].description}</p>
         </div>
       )
     }
   }
 
   render() {
+    const mapStyles = {
+      width: '50%',
+      height: '50%',
+    };
+      
     if (this.state.redirect === true) {
       this.setState({redirect: false})
       return (
@@ -135,6 +146,10 @@ class LoadedPage extends Component {
             {this.renderCampContactInfo()}
             {this.renderCampFeeInfo()}
           </div>
+          <div id="weather" className="module">
+            <h3>Weather Info</h3>
+            <p>{this.props.park.weatherInfo}</p>
+          </div>
           <div id="hours" className="module">
             <h3>Hours</h3>
             <ul>
@@ -160,8 +175,14 @@ class LoadedPage extends Component {
               {this.renderLi()}
             </ul>
           </div>
+
         </main>
-        <footer></footer>
+
+        <div id="map">
+
+        <MapContainer latitude={this.props.park.latitude} longitude={this.props.park.longitude}/>
+        </div>
+
       </div>
     )
   }
