@@ -11,8 +11,8 @@ export class MapContainer extends Component {
     const mapStyles = {
       width: '70%',
       height: '50%',
-      margin: '25px 15%',
-      borderRadius: '10px'
+      margin: '150px 15%',
+      borderRadius: '10px',
     };
 
     return (

@@ -170,6 +170,8 @@ h3 {
 #events {
   width: 90%;
   margin: 25px 5% 0 5%;
+  float: left;
+  position: relative;
 }
 
 #events h2 {
@@ -193,10 +195,6 @@ ul {
 footer {
   height: 20vh;
   width: 100%;
-}
-
-#map {
-  height: 50px;
 }
 
 @media only screen and (max-width: 962px) {
