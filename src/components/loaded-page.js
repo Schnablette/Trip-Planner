@@ -5,6 +5,13 @@ import { Redirect } from 'react-router-dom'
 import { fetchParkInformation, fetchCampSiteInformation, fetchEVENTInformation } from "../actions";
 
 class LoadedPage extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      redirect: false
+    }
+  }
   componentDidMount() {
     const { parkCode } = this.props.match.params;
     this.props.fetchParkInformation(parkCode);
@@ -15,14 +22,12 @@ class LoadedPage extends Component {
   //call this function when the "generate your escape" button is clicked
   updateNationalPark() {
     const parkCodes = ["acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cuva", "drto", "ever", "glac", "grba", "grca", "grsm", "grte", "gumo", "havo", "hosp", "isro", "jotr", "kefj", "kova", "lavo", "maca", "meve", "mora", "noca", "olym", "pefo", "romo", "sagu", "shen", "thro", "viis", "voya", "wica", "yell", "yose", "zion"];
-    const parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
-    this.props.fetchParkInformation(parkCode);
-    this.props.fetchCampSiteInformation(parkCode);
-    this.props.fetchEVENTInformation(parkCode);
+    this.parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
+    this.props.fetchParkInformation(this.parkCode);
+    this.props.fetchCampSiteInformation(this.parkCode);
+    this.props.fetchEVENTInformation(this.parkCode);
+    this.setState({redirect: true})
 
-    return (
-      <Redirect to={`/${parkCode}`} />
-    )
   }
 
   renderLi() {
@@ -94,14 +99,18 @@ class LoadedPage extends Component {
   }
 
   render() {
-    if (!this.props.park || !this.props.campsite || !this.props.events) {
+    if (this.state.redirect === true) {
+      this.setState({redirect: false})
+      return (
+        <Redirect to={`/${this.parkCode}`} />
+      )
+    } else if (!this.props.park || !this.props.campsite || !this.props.events) {
       return (
         <main>
           <h1>Loading...</h1>
         </main>
       )
-    }
-    return (
+    } else return (
       <div>
       <nav>
         <p>Escape from 2020</p>
