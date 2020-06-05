@@ -10,7 +10,7 @@ export class MapContainer extends Component {
     console.log(this.props.latitude, this.props.longitude)
     const mapStyles = {
       width: '70%',
-      height: '50%',
+      height: '70%',
       margin: '150px 15%',
       borderRadius: '10px',
     };
@@ -18,7 +18,7 @@ export class MapContainer extends Component {
     return (
       <Map
         google={this.props.google}
-        zoom={8}
+        zoom={11}
         style={mapStyles}
         initialCenter={{ lat: this.props.latitude, lng: this.props.longitude }}
         center={{ lat: this.props.latitude, lng: this.props.longitude }}

@@ -27,7 +27,7 @@ class LoadedPage extends Component {
 
   //call this function when the "generate your escape" button is clicked
   updateNationalPark() {
-    const parkCodes = ["acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cuva", "drto", "ever", "glac", "grba", "grca", "grsm", "grte", "gumo", "havo", "hosp", "isro", "jotr", "kefj", "kova", "lavo", "maca", "meve", "mora", "noca", "olym", "pefo", "romo", "sagu", "shen", "thro", "viis", "voya", "wica", "yell", "yose", "zion"];
+    const parkCodes = ["acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cuva", "drto", "ever", "glac", /*"grba",*/ "grca", "grsm", "grte", "gumo", "havo", "hosp", "isro", "jotr", "kefj", "kova", "lavo", "maca", "meve", "mora", "noca", "olym", "pefo", "romo", "sagu", "shen", "thro", "viis", "voya", "wica", "yell", "yose", "zion"];
     this.parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
     this.props.fetchParkInformation(this.parkCode);
     this.props.fetchCampSiteInformation(this.parkCode);
@@ -62,7 +62,7 @@ class LoadedPage extends Component {
       return (
         <div>
           <h3>No Campsites Available Right Now</h3>
-          <p>Consider AirBnB or find a hotel nearby</p>
+          <p>Consider AirBnB or find a hotel nearby.</p>
         </div>
       )
     } else if (!this.props.campsite.contacts.phoneNumbers || !this.props.campsite.contacts.phoneNumbers[0] ||!this.props.campsite.contacts.emailAddresses || !this.props.campsite.contacts.emailAddresses[0]  ) {
@@ -77,10 +77,26 @@ class LoadedPage extends Component {
         <div>
           <h3>Campsite: {this.props.campsite.name}</h3>
           <p>Contact the campsite at {this.props.campsite.contacts.phoneNumbers[0].phoneNumber} or at {this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
-          <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
+          <p>To book your campsite, visit <a href={`${this.props.campsite.reservationUrl}`} target="_blank">{this.props.campsite.reservationUrl}</a></p>
         </div>
       )
     }
+  }
+
+  renderEntranceFee() {
+    if (!this.props.park.entranceFees[0]) {
+      return (
+        <div>
+          <h3>No entrance fee found</h3>
+          <p>Visit the park website for more information.</p>
+        </div>
+        )
+    } else return (
+      <div>
+        <h3>{this.props.park.entranceFees[0].title}</h3>
+        <p>${Number(this.props.park.entranceFees[0].cost)}</p>
+      </div>
+    )
   }
 
   renderCampFeeInfo() {
@@ -137,8 +153,7 @@ class LoadedPage extends Component {
             <p>{this.props.park.description}</p>
           </div>
           <div id="cost" className="module">
-            <h3>{this.props.park.entranceFees[0].title}</h3>
-            <p>${Number(this.props.park.entranceFees[0].cost)}</p>
+            {this.renderEntranceFee()}
           </div>
           <div id="address" className="module">
             {this.renderCampContactInfo()}
