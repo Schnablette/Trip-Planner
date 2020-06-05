@@ -23,7 +23,7 @@ class LoadedPage extends Component {
   renderLi() {
     if (this.props.events.total === '0') {
       return (
-        <li>No current events. Find your own Peace</li>
+        <li>No current events. Find your own Peace in the Wilderness.</li>
       )
     } else {
       return this.props.events.map(event => {
@@ -33,11 +33,28 @@ class LoadedPage extends Component {
       })
 
     }
-    // return this.props.events.map(event => {
-    //   return (
-    //     <li>{event}</li>
-    //   )
-    // })
+  }
+
+  renderCampInfo() {
+    if (this.props.campsite.total === '0') {
+      return (
+        <div>
+          <h3>No Campsites Available Right Now</h3>
+          <p>Consider AirBnB or find a hotel nearby</p>
+        </div> 
+      )
+    } else {
+      return (
+        <div>
+            <h3>{this.props.campsite.name}</h3>
+            <p>{this.props.campsite.contacts.phoneNumbers[0].phoneNumber}</p>
+            <p>{this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
+            <p>{this.props.campsite.fees[0].cost}</p>
+            <p>{this.props.campsite.fees[0].description}</p>
+            <p>{this.props.campsite.reservationUrl}</p>
+        </div>
+      )
+    }
   }
 
   render() {
@@ -68,12 +85,7 @@ class LoadedPage extends Component {
           </div>
           <div id="address" className="module">
             <h3>Campsite</h3>
-            <h3>{this.props.campsite.name}</h3>
-            <p>{this.props.campsite.contacts.phoneNumbers[0].phoneNumber}</p>
-            <p>{this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
-            <p>{this.props.campsite.fees[0].description}</p>
-            <p>{this.props.campsite.reservationUrl}</p>
-            <image src={this.props.campsite.images[0].url} />
+            {this.renderCampInfo()}
           </div>
           <div id="weather" className="module">
             <h3>Weather Info</h3>
