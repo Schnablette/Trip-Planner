@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//import { connect } from "react-redux";
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 
@@ -17,16 +18,17 @@ export class MapContainer extends Component {
         google={this.props.google}
         zoom={8}
         style={mapStyles}
-        initialCenter={{ lat: 47.444, lng: -122.176 }}
+        initialCenter={{ lat: this.props.park.latitude, lng: this.props.park.longitude }}
       />
     )
   }
 }
 
-function mapStateToProps(state) {
-  return { park: state.park, campsite: state.campsite, events: state.events };
-}
+// function mapStateToProps(state) {
+//   return { park: state.park };
+// }
 
 export default GoogleApiWrapper({
   apiKey: ''
 })(MapContainer);
+

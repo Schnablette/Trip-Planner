@@ -151,7 +151,7 @@ class LoadedPage extends Component {
 
         <div id="map">
 
-          <MapContainer />
+          <MapContainer {...this.props} />
 
         </div>
 
