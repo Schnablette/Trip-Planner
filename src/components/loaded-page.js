@@ -10,6 +10,7 @@ import MapContainer from './MapContainer'
 
 
 class LoadedPage extends Component {
+  
   componentDidMount() {
     const { parkCode } = this.props.match.params;
     this.props.fetchParkInformation(parkCode);
@@ -94,6 +95,12 @@ class LoadedPage extends Component {
   }
 
   render() {
+
+    const mapStyles = {
+      width: '50%',
+      height: '50%',
+    };
+
     if (!this.props.park || !this.props.campsite || !this.props.events) {
       return (
         <main>
@@ -151,8 +158,7 @@ class LoadedPage extends Component {
 
         <div id="map">
 
-          <MapContainer {...this.props} />
-
+        <MapContainer latitude={this.props.park.latitude} longitude={this.props.park.longitude}/>
         </div>
 
       </div>
