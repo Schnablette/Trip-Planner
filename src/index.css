@@ -54,7 +54,7 @@ h1 {
 h3 {
   color: white;
   text-align: center;
-  margin: 10% 10% 0 10%;
+  margin: 20px 10% 0 10%;
 }
 
 #index-button {
@@ -95,31 +95,41 @@ h3 {
 }
 
 #description {
-  width: 90%;
-  margin: 25px 5% 0 5%;
-}
-
-#cost {
-  width: 30%;
+  width: 60%;
   margin: 25px 5% 0 5%;
   float: left;
 }
 
-#address {
-  width: 55%;
+#cost {
+  width: 25%;
   margin: 25px 5% 0 0;
   float: left;
 }
 
+#address {
+  width: 90%;
+  margin: 25px 5% 0 5%;
+  float: left;
+}
+
+#address p {
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+#address h3 {
+  margin-bottom: 20px;
+}
+
 #weather {
   width: 55%;
-  margin: 25px 5% 0 5%;
+  margin: 25px 5% 0 0;
   float: left;
 }
 
 #hours {
   width: 30%;
-  margin: 25px 5% 0 0;
+  margin: 25px 5% 0 5%;
   float: left;
 }
 
@@ -147,8 +157,13 @@ ul {
   margin-right: 35px;
 }
 
+footer {
+  height: 20vh;
+  width: 100%;
+}
+
 @media only screen and (max-width: 600px) {
-  #hours, #address, #weather, #description, #cost {
+  #hours, #address, #weather, #description, #cost, #events {
     float: none;
     width: 90%;
     margin: 25px 5% 0 5%;

@@ -46,22 +46,21 @@ class LoadedPage extends Component {
         <div>
           <h3>No Campsites Available Right Now</h3>
           <p>Consider AirBnB or find a hotel nearby</p>
-        </div> 
+        </div>
       )
     } else if (!this.props.campsite.contacts.phoneNumbers || !this.props.campsite.contacts.phoneNumbers[0] ||!this.props.campsite.contacts.emailAddresses || !this.props.campsite.contacts.emailAddresses[0]  ) {
       return (
         <div>
-            <h3>{this.props.campsite.name}</h3>
-            <p>{this.props.campsite.reservationUrl}</p>
+            <h3>Campsite: {this.props.campsite.name}</h3>
+            <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
         </div>
       )
     }  else {
       return (
         <div>
-            <h3>{this.props.campsite.name}</h3>
-            <p>{this.props.campsite.contacts.phoneNumbers[0].phoneNumber}</p>
-            <p>{this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
-            <p>{this.props.campsite.reservationUrl}</p>
+          <h3>Campsite: {this.props.campsite.name}</h3>
+          <p>The fee for this campsite is ${Number(this.props.campsite.fees[0].cost)}. Contact the campsite at {this.props.campsite.contacts.phoneNumbers[0].phoneNumber} or at {this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
+          <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
         </div>
       )
     }
@@ -81,7 +80,7 @@ class LoadedPage extends Component {
     } else {
       return (
         <div>
-            <p>{this.props.campsite.fees[0].cost}</p>
+            <p>Each campsite costs {this.props.campsite.fees[0].cost}</p>
             <p>{this.props.campsite.fees[0].description}</p>
         </div>
       )
@@ -119,10 +118,6 @@ class LoadedPage extends Component {
             {this.renderCampContactInfo()}
             {this.renderCampFeeInfo()}
           </div>
-          <div id="weather" className="module">
-            <h3>Weather Info</h3>
-            <p>{this.props.park.weatherInfo}</p>
-          </div>
           <div id="hours" className="module">
             <h3>Hours</h3>
             <ul>
@@ -135,6 +130,10 @@ class LoadedPage extends Component {
               <li>Saturday: {this.props.park.operatingHours[0].standardHours.saturday}</li>
             </ul>
           </div>
+          <div id="weather" className="module">
+            <h3>Weather Info</h3>
+            <p>{this.props.park.weatherInfo}</p>
+          </div>
           <div id="events">
             <h2>Upcoming Events</h2>
             <ul>
@@ -142,7 +141,7 @@ class LoadedPage extends Component {
             </ul>
           </div>
         </main>
-
+        <footer></footer>
       </div>
     )
   }
