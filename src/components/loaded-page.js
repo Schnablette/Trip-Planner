@@ -2,9 +2,22 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Redirect } from 'react-router-dom'
+
 import { fetchParkInformation, fetchCampSiteInformation, fetchEVENTInformation } from "../actions";
+//import { Map, GoogleApiWrapper } from 'google-maps-react';
+import MapContainer from './MapContainer'
+
+
 
 class LoadedPage extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      redirect: false
+    }
+  }
+
   componentDidMount() {
     const { parkCode } = this.props.match.params;
     this.props.fetchParkInformation(parkCode);
@@ -15,14 +28,12 @@ class LoadedPage extends Component {
   //call this function when the "generate your escape" button is clicked
   updateNationalPark() {
     const parkCodes = ["acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cuva", "drto", "ever", "glac", "grba", "grca", "grsm", "grte", "gumo", "havo", "hosp", "isro", "jotr", "kefj", "kova", "lavo", "maca", "meve", "mora", "noca", "olym", "pefo", "romo", "sagu", "shen", "thro", "viis", "voya", "wica", "yell", "yose", "zion"];
-    const parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
-    this.props.fetchParkInformation(parkCode);
-    this.props.fetchCampSiteInformation(parkCode);
-    this.props.fetchEVENTInformation(parkCode);
+    this.parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
+    this.props.fetchParkInformation(this.parkCode);
+    this.props.fetchCampSiteInformation(this.parkCode);
+    this.props.fetchEVENTInformation(this.parkCode);
+    this.setState({redirect: true})
 
-    return (
-      <Redirect to={`/${parkCode}`} />
-    )
   }
 
   renderLi() {
@@ -57,8 +68,8 @@ class LoadedPage extends Component {
     } else if (!this.props.campsite.contacts.phoneNumbers || !this.props.campsite.contacts.phoneNumbers[0] ||!this.props.campsite.contacts.emailAddresses || !this.props.campsite.contacts.emailAddresses[0]  ) {
       return (
         <div>
-            <h3>Campsite: {this.props.campsite.name}</h3>
-            <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
+            <h3>{this.props.campsite.name}</h3>
+            <p>{this.props.campsite.reservationUrl}</p>
         </div>
       )
     }  else {
@@ -86,22 +97,27 @@ class LoadedPage extends Component {
     } else {
       return (
         <div>
-            <p>Each campsite costs ${Number(this.props.campsite.fees[0].cost)}</p>
-            <p>{this.props.campsite.fees[0].description}</p>
+           <p>Each campsite costs ${Number(this.props.campsite.fees[0].cost)}</p>
+           <p>{this.props.campsite.fees[0].description}</p>
         </div>
       )
     }
   }
 
   render() {
-    if (!this.props.park || !this.props.campsite || !this.props.events) {
+
+    if (this.state.redirect === true) {
+      this.setState({redirect: false})
+      return (
+        <Redirect to={`/${this.parkCode}`} />
+      )
+    } else if (!this.props.park || !this.props.campsite || !this.props.events) {
       return (
         <main>
           <h1>Loading...</h1>
         </main>
       )
-    }
-    return (
+    } else return (
       <div>
       <nav>
         <p>Escape from 2020</p>
@@ -151,8 +167,13 @@ class LoadedPage extends Component {
               {this.renderLi()}
             </ul>
           </div>
+
         </main>
-        <footer></footer>
+
+        <div id="map">
+          <MapContainer latitude={this.props.park.latitude} longitude={this.props.park.longitude}/>
+        </div>
+
       </div>
     )
   }

@@ -13,8 +13,7 @@ class LandingPage extends Component {
   pickCode() {
     const parkCodes =  ["acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cuva", "drto", "ever", "glac", "grba", "grca", "grsm", "grte", "gumo", "havo", "hosp", "isro", "jotr", "kefj", "kova", "lavo", "maca", "meve", "mora", "noca", "olym", "pefo", "romo", "sagu", "shen", "thro", "viis", "voya", "wica", "yell", "yose", "zion"];
     this.parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
-    this.setState({redirect: true}, () => console.log(this.state.redirect))
-
+    this.setState({redirect: true})
   }
 
   render() {
@@ -24,12 +23,12 @@ class LandingPage extends Component {
       )
     } else return (
       <div>
-        <nav>
-          <p>Nat'l Parks Trip Planner</p>
-          <button>Generate Next Trip</button>
-        </nav>
-        <h2>Plan your next getaway by clicking the "generate trip" button</h2>
-        <button id="index-button" onClick={this.pickCode.bind(this)}>Generate Trip</button>
+      <nav>
+        <p>Escape from 2020</p>
+        <button onClick={this.pickCode.bind(this)}>Generate Your Escape</button>
+      </nav>
+        <h2>2020 having you down? Let us plan your escape. Click the button to start.</h2>
+        <button id="index-button" onClick={this.pickCode.bind(this)}>Generate Your Escape</button>
       </div>
     )
   }
