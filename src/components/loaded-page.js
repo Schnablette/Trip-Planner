@@ -40,7 +40,7 @@ class LoadedPage extends Component {
     }
   }
 
-  renderCampInfo() {
+  renderCampContactInfo() {
     if (this.props.campsite.total === '0') {
       return (
         <div>
@@ -52,32 +52,40 @@ class LoadedPage extends Component {
       return (
         <div>
             <h3>{this.props.campsite.name}</h3>
-            <p>{this.props.campsite.fees[0].cost}</p>
-            <p>{this.props.campsite.fees[0].description}</p>
             <p>{this.props.campsite.reservationUrl}</p>
         </div>
       )
-    } else if (!this.props.campsite.fees) {
+    }  else {
       return (
         <div>
             <h3>{this.props.campsite.name}</h3>
             <p>{this.props.campsite.contacts.phoneNumbers[0].phoneNumber}</p>
             <p>{this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
             <p>{this.props.campsite.reservationUrl}</p>
+        </div>
+      )
+    }
+  }
+
+  renderCampFeeInfo() {
+    if (this.props.campsite.total === '0') {
+      return (
+        <div></div> 
+      )
+    } else if (!this.props.campsite.fees || !this.props.campsite.fees[0] ) {
+      return (
+        <div>
+            <p>No Camp Fees Found</p>
         </div>
       )
     } else {
       return (
         <div>
-            <h3>{this.props.campsite.name}</h3>
-            <p>{this.props.campsite.contacts.phoneNumbers[0].phoneNumber}</p>
-            <p>{this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
             <p>{this.props.campsite.fees[0].cost}</p>
             <p>{this.props.campsite.fees[0].description}</p>
-            <p>{this.props.campsite.reservationUrl}</p>
         </div>
       )
-    }
+    } 
   }
 
   render() {
@@ -108,7 +116,8 @@ class LoadedPage extends Component {
           </div>
           <div id="address" className="module">
             <h3>Campsite</h3>
-            {this.renderCampInfo()}
+            {this.renderCampContactInfo()}
+            {this.renderCampFeeInfo()}
           </div>
           <div id="weather" className="module">
             <h3>Weather Info</h3>
