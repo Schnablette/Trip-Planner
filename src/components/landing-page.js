@@ -25,6 +25,7 @@ class LandingPage extends Component {
       <div>
       <nav>
         <p>Escape from 2020</p>
+        <img id="teddy" src="https://lh3.googleusercontent.com/proxy/A4YjDHRavkpke3RZGkNWjkIKkZOrMHrU2mMTsqajXbUYKqjiv9d6rkE-U1akGjx73oLtWZYLep40ryWG4MoyY-UvdmIMF2fKDURwgdY_2ZQZ5tbzcBqPCotrrCUM2WwncJMKgFN02QWD_CKEvFErgVXxZhFdkqKjx2Men2sE9Eh0pJ1JvnLCAWxKcuQwrXaw8uxE3bd1ig5v" />
         <button onClick={this.pickCode.bind(this)}>Generate Your Escape</button>
       </nav>
         <h2>2020 having you down? Let us plan your escape. Click the button to start.</h2>

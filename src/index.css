@@ -36,6 +36,11 @@ nav button:hover {
   background-color: var(--light-color)
 }
 
+#teddy {
+  width: 50px;
+  padding: 20px;
+}
+
 h2 {
   font-family: "Helvetica", serif;
   font-size: 1.5em;
@@ -140,6 +145,7 @@ a {
   width: 90%;
   margin: 25px 5% 0 5%;
   float: left;
+  background-image: url('https://www.dw.com/image/45348566_303.jpg')
 }
 
 #address p {
