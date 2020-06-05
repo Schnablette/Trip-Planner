@@ -48,7 +48,13 @@ h1 {
   font-size: 5em;
   text-align: center;
   margin: 0 5%;
-  color: var(--main-color)
+  color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  position: absolute;
+  z-index: 5;
+  top: 35%;
+  width: 90%;
 }
 
 h3 {
@@ -94,6 +100,20 @@ h3 {
   color: white;
 }
 
+#image {
+  width: 90%;
+  margin: 25px 5% 0 5%;
+  background-color: ghostwhite;
+  position: relative;
+}
+
+#image img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  height: 200px;
+}
+
 #description {
   width: 60%;
   margin: 25px 5% 0 5%;
@@ -133,6 +153,20 @@ h3 {
   float: left;
 }
 
+#images {
+  width: 90%;
+  margin: 25px 5% 0 5%;
+  background-color: ghostwhite;
+}
+
+#images img {
+  width: 100%;
+  max-height: 500px;
+  margin-top: 25px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
 #events {
   float: left;
   width: 90%;
@@ -160,6 +194,16 @@ ul {
 footer {
   height: 20vh;
   width: 100%;
+}
+
+@media only screen and (max-width: 962px) {
+  h1 {
+    color: var(--main-color);
+    -webkit-text-stroke-width: 0;
+    position: relative;
+    top: 0;
+    width: 90%;
+  }
 }
 
 @media only screen and (max-width: 600px) {

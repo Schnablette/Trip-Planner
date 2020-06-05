@@ -19,7 +19,7 @@ class LoadedPage extends Component {
     this.props.fetchParkInformation(parkCode);
     this.props.fetchCampSiteInformation(parkCode);
     this.props.fetchEVENTInformation(parkCode);
-    
+
     return (
       <Redirect to={`/${parkCode}`} />
     )
@@ -37,6 +37,12 @@ class LoadedPage extends Component {
         )
       })
 
+    }
+  }
+
+  pictureValidation() {
+    if (this.props.park.images[1]) {
+      return <img src={`${this.props.park.images[1].url}`}/>
     }
   }
 
@@ -59,7 +65,7 @@ class LoadedPage extends Component {
       return (
         <div>
           <h3>Campsite: {this.props.campsite.name}</h3>
-          <p>The fee for this campsite is ${Number(this.props.campsite.fees[0].cost)}. Contact the campsite at {this.props.campsite.contacts.phoneNumbers[0].phoneNumber} or at {this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
+          <p>Contact the campsite at {this.props.campsite.contacts.phoneNumbers[0].phoneNumber} or at {this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
           <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
         </div>
       )
@@ -69,7 +75,7 @@ class LoadedPage extends Component {
   renderCampFeeInfo() {
     if (this.props.campsite.total === '0') {
       return (
-        <div></div> 
+        <div></div>
       )
     } else if (!this.props.campsite.fees || !this.props.campsite.fees[0] ) {
       return (
@@ -80,11 +86,11 @@ class LoadedPage extends Component {
     } else {
       return (
         <div>
-            <p>Each campsite costs {this.props.campsite.fees[0].cost}</p>
+            <p>Each campsite costs ${Number(this.props.campsite.fees[0].cost)}</p>
             <p>{this.props.campsite.fees[0].description}</p>
         </div>
       )
-    } 
+    }
   }
 
   render() {
@@ -104,8 +110,11 @@ class LoadedPage extends Component {
 
         <main>
 
-          <h2>Your next trip will be to...</h2>
+          <h2>Your next escape will be to...</h2>
           <h1>{this.props.park.fullName}</h1>
+          <div id="image" className="module">
+            <img src={`${this.props.park.images[0].url}`}/>
+          </div>
           <div id="description" className="module">
             <p>{this.props.park.description}</p>
           </div>
@@ -114,7 +123,6 @@ class LoadedPage extends Component {
             <p>${Number(this.props.park.entranceFees[0].cost)}</p>
           </div>
           <div id="address" className="module">
-            <h3>Campsite</h3>
             {this.renderCampContactInfo()}
             {this.renderCampFeeInfo()}
           </div>
@@ -133,6 +141,9 @@ class LoadedPage extends Component {
           <div id="weather" className="module">
             <h3>Weather Info</h3>
             <p>{this.props.park.weatherInfo}</p>
+          </div>
+          <div id="images">
+            {this.pictureValidation()}
           </div>
           <div id="events">
             <h2>Upcoming Events</h2>
