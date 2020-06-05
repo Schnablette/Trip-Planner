@@ -20,6 +20,40 @@ class LoadedPage extends Component {
   //
   // }
 
+  renderLi() {
+    if (this.props.events.total === '0') {
+      return (
+        <li>No current events. Find your own Peace in the Wilderness.</li>
+      )
+    } else {
+      return this.props.events.map(event => {
+        return (
+          <li key={event.title}>{event.title}</li>
+        )
+      })
+
+    }
+  }
+
+  renderCampInfo() {
+    if (this.props.campsite.total === '0') {
+      return (
+        <div>
+          <h3>No Campsites Available Right Now</h3>
+          <p>Consider AirBnB or find a hotel nearby</p>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+            <h3>Campsite: {this.props.campsite.name}</h3>
+            <p>The fee for this campsite is ${Number(this.props.campsite.fees[0].cost)}. Contact the campsite at {this.props.campsite.contacts.phoneNumbers[0].phoneNumber} or at {this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
+            <p>{this.props.campsite.fees[0].description} For more information, visit {this.props.campsite.reservationUrl}</p>
+        </div>
+      )
+    }
+  }
+
   render() {
     if (!this.props.park || !this.props.campsite || !this.props.events) {
       return (
@@ -44,15 +78,10 @@ class LoadedPage extends Component {
           </div>
           <div id="cost" className="module">
             <h3>{this.props.park.entranceFees[0].title}</h3>
-            <p>${this.props.park.entranceFees[0].cost}</p>
+            <p>${Number(this.props.park.entranceFees[0].cost)}</p>
           </div>
           <div id="address" className="module">
-            <h3>Address</h3>
-            <p>Stuff goes here</p>
-          </div>
-          <div id="weather" className="module">
-            <h3>Weather Info</h3>
-            <p>{this.props.park.weatherInfo}</p>
+            {this.renderCampInfo()}
           </div>
           <div id="hours" className="module">
             <h3>Hours</h3>
@@ -66,14 +95,18 @@ class LoadedPage extends Component {
               <li>Saturday: {this.props.park.operatingHours[0].standardHours.saturday}</li>
             </ul>
           </div>
+          <div id="weather" className="module">
+            <h3>Weather Info</h3>
+            <p>{this.props.park.weatherInfo}</p>
+          </div>
           <div id="events">
             <h2>Upcoming Events</h2>
             <ul>
-              <li>Event Item</li>
+              {this.renderLi()}
             </ul>
           </div>
         </main>
-
+        <footer></footer>
       </div>
     )
   }

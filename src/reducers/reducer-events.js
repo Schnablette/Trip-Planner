@@ -6,9 +6,9 @@ export default function(state = null, action) {
       if(!action.payload.data.data[0]) {
         return action.payload.data
       } else {
-        return action.payload.data.data[0];
+        return action.payload.data.data;
       }
-      
+
     default:
       return state;
   }
