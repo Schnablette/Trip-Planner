@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { fetchParkInformation } from "../actions";
+import { fetchParkInformation, fetchCampSiteInformation, fetchEVENTInformation } from "../actions";
 
 class LoadedPage extends Component {
   componentDidMount() {
     const { parkCode } = this.props.match.params;
     this.props.fetchParkInformation(parkCode);
-    console.log('the park code is: ' + parkCode)
+    this.props.fetchCampSiteInformation(parkCode);
+    this.props.fetchCampSiteInformation(parkCode);
+    this.props.fetchEVENTInformation(parkCode,() => console.log(this.props.events));
   }
 
   //call this function when the generate button is clicked
-  updateNationalPark() {
-    const parkCodes = ['shen', 'acad'];
-    const parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
-    this.props.fetchParkInformation(parkCode);
-
-  }
+  // updateNationalPark() {
+  //   const parkCodes = ['shen', 'acad'];
+  //   const parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
+  //   this.props.fetchParkInformation(parkCode);
+  //
+  // }
 
   render() {
     if (!this.props.park) {
@@ -29,8 +31,8 @@ class LoadedPage extends Component {
     return (
       <div>
       <nav>
-        <p>Nat'l Parks Trip Planner</p>
-        <button>Generate Next Trip</button>
+        <p>Escape from 2020</p>
+        <button>Generate Your Escape</button>
       </nav>
 
         <main>
@@ -78,11 +80,11 @@ class LoadedPage extends Component {
 }
 
 function mapStateToProps(state) {
-  return { park: state.park };
+  return { park: state.park, campsite: state.campsite, events: state.events };
 }
 
 function mapDispatchToProp(dispatch) {
-  return bindActionCreators({fetchParkInformation}, dispatch);
+  return bindActionCreators({fetchParkInformation, fetchCampSiteInformation, fetchEVENTInformation}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProp)(LoadedPage)
