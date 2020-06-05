@@ -47,8 +47,14 @@ h2 {
 h1 {
   font-size: 5em;
   text-align: center;
-  margin: 0;
+  margin: 0 5%;
   color: var(--main-color)
+}
+
+h3 {
+  color: white;
+  text-align: center;
+  margin: 10% 10% 0 10%;
 }
 
 #index-button {
@@ -75,6 +81,18 @@ h1 {
   color: white;
   font-family: "Helvetica", serif;
   padding: 15px;
+  margin: 0 20px 20px 20px;
+  line-height: 2em;
+}
+
+.module ul {
+  padding: 10px;
+}
+
+.module li {
+  font-family: "Helvetica", serif;
+  color: white;
+  margin-bottom: 2em;
 }
 
 #description {
@@ -95,15 +113,21 @@ h1 {
 }
 
 #weather {
-  width: 60%;
+  width: 55%;
   margin: 25px 5% 0 5%;
   float: left;
 }
 
 #hours {
-  width: 25%;
-  margin: 25px 5% 50px 0;
+  width: 30%;
+  margin: 25px 5% 0 0;
   float: left;
+}
+
+#events {
+  float: left;
+  width: 90%;
+  margin: 25px 5% 0 5%;
 }
 
 li {
@@ -114,10 +138,22 @@ ul {
   list-style: none;
 }
 
+#events li {
+  margin-right: 35px;
+}
+
 @media only screen and (max-width: 600px) {
   #hours, #address, #weather, #description, #cost {
     float: none;
     width: 90%;
     margin: 25px 5% 0 5%;
+  }
+
+  h3 {
+    padding-top: 20px;
+  }
+
+  #hours ul {
+    padding-bottom: 50px;
   }
 }
