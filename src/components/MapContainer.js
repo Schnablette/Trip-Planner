@@ -28,5 +28,5 @@ function mapStateToProps(state) {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyASqfYqXSpj9Hmn3hrPiu8RwOXxxmOhyLE'
+  apiKey: ''
 })(MapContainer);
