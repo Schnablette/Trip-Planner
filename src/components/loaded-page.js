@@ -17,7 +17,7 @@ class LoadedPage extends Component {
       redirect: false
     }
   }
-  
+
   componentDidMount() {
     const { parkCode } = this.props.match.params;
     this.props.fetchParkInformation(parkCode);
@@ -63,7 +63,7 @@ class LoadedPage extends Component {
         <div>
           <h3>No Campsites Available Right Now</h3>
           <p>Consider AirBnB or find a hotel nearby</p>
-        </div> 
+        </div>
       )
     } else if (!this.props.campsite.contacts.phoneNumbers || !this.props.campsite.contacts.phoneNumbers[0] ||!this.props.campsite.contacts.emailAddresses || !this.props.campsite.contacts.emailAddresses[0]  ) {
       return (
@@ -105,11 +105,7 @@ class LoadedPage extends Component {
   }
 
   render() {
-    const mapStyles = {
-      width: '50%',
-      height: '50%',
-    };
-      
+
     if (this.state.redirect === true) {
       this.setState({redirect: false})
       return (
@@ -146,10 +142,6 @@ class LoadedPage extends Component {
             {this.renderCampContactInfo()}
             {this.renderCampFeeInfo()}
           </div>
-          <div id="weather" className="module">
-            <h3>Weather Info</h3>
-            <p>{this.props.park.weatherInfo}</p>
-          </div>
           <div id="hours" className="module">
             <h3>Hours</h3>
             <ul>
@@ -179,8 +171,7 @@ class LoadedPage extends Component {
         </main>
 
         <div id="map">
-
-        <MapContainer latitude={this.props.park.latitude} longitude={this.props.park.longitude}/>
+          <MapContainer latitude={this.props.park.latitude} longitude={this.props.park.longitude}/>
         </div>
 
       </div>

@@ -4,13 +4,15 @@ import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 
 export class MapContainer extends Component {
-  
+
   render() {
     console.log(`rendering map container`)
     console.log(this.props.latitude, this.props.longitude)
     const mapStyles = {
-      width: '50%',
+      width: '70%',
       height: '50%',
+      margin: '25px 15%',
+      borderRadius: '10px'
     };
 
     return (
@@ -32,4 +34,3 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyASqfYqXSpj9Hmn3hrPiu8RwOXxxmOhyLE'
 })(MapContainer);
-
