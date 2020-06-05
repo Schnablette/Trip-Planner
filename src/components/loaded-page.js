@@ -21,7 +21,7 @@ class LoadedPage extends Component {
   // }
 
   render() {
-    if (!this.props.park) {
+    if (!this.props.park || !this.props.campsite || !this.props.events) {
       return (
         <main>
           <h1>Loading...</h1>
