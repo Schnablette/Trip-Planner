@@ -11,7 +11,7 @@ class LandingPage extends Component {
   }
 
   pickCode() {
-    const parkCodes = ['shen', 'acad'];
+    const parkCodes =  ["acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cuva", "drto", "ever", "glac", "grba", "grca", "grsm", "grte", "gumo", "havo", "hosp", "isro", "jotr", "kefj", "kica", "kova", "lavo", "maca", "meve", "mora", "noca", "olym", "pefo", "romo", "sagu", "sequ", "shen", "thro", "viis", "voya", "wica", "yell", "yose", "zion"];
     this.parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
     this.setState({redirect: true}, () => console.log(this.state.redirect))
 
