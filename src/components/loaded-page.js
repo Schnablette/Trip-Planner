@@ -20,6 +20,26 @@ class LoadedPage extends Component {
   //
   // }
 
+  renderLi() {
+    if (this.props.events.total === '0') {
+      return (
+        <li>No current events. Find your own Peace</li>
+      )
+    } else {
+      return this.props.events.map(event => {
+        return (
+          <li key={event.title}>{event.title}</li>
+        )
+      })
+
+    }
+    // return this.props.events.map(event => {
+    //   return (
+    //     <li>{event}</li>
+    //   )
+    // })
+  }
+
   render() {
     if (!this.props.park || !this.props.campsite || !this.props.events) {
       return (
@@ -44,7 +64,7 @@ class LoadedPage extends Component {
           </div>
           <div id="cost" className="module">
             <h3>{this.props.park.entranceFees[0].title}</h3>
-            <p>${this.props.park.entranceFees[0].cost}</p>
+            <p>${Number(this.props.park.entranceFees[0].cost)}</p>
           </div>
           <div id="address" className="module">
             <h3>Address</h3>
@@ -69,7 +89,7 @@ class LoadedPage extends Component {
           <div id="events">
             <h2>Upcoming Events</h2>
             <ul>
-              <li>Event Item</li>
+              {this.renderLi()}
             </ul>
           </div>
         </main>
