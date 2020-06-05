@@ -47,8 +47,13 @@ class LoadedPage extends Component {
             <p>${this.props.park.entranceFees[0].cost}</p>
           </div>
           <div id="address" className="module">
-            <h3>Address</h3>
-            <p>Stuff goes here</p>
+            <h3>Campsite</h3>
+            <h3>{this.props.campsite.name}</h3>
+            <p>{this.props.campsite.contacts.phoneNumbers[0].phoneNumber}</p>
+            <p>{this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
+            <p>{this.props.campsite.fees[0].description}</p>
+            <p>{this.props.campsite.reservationUrl}</p>
+            <image src={this.props.campsite.images[0].url} />
           </div>
           <div id="weather" className="module">
             <h3>Weather Info</h3>
