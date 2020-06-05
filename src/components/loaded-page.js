@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 import { fetchParkInformation, fetchCampSiteInformation, fetchEVENTInformation } from "../actions";
 //import { Map, GoogleApiWrapper } from 'google-maps-react';
@@ -114,13 +114,15 @@ class LoadedPage extends Component {
     } else if (!this.props.park || !this.props.campsite || !this.props.events) {
       return (
         <main>
-          <h1>Loading...</h1>
+          <h1 id="loading">Loading...</h1>
         </main>
       )
     } else return (
       <div>
       <nav>
-        <p>Escape from 2020</p>
+        <Link to='/'>
+          <p>Escape from 2020</p>
+        </Link>
         <button onClick={this.updateNationalPark.bind(this)}>Generate Your Escape</button>
       </nav>
 

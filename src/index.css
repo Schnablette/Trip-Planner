@@ -63,6 +63,11 @@ h3 {
   margin: 20px 10% 0 10%;
 }
 
+#loading {
+  color: var(--main-color);
+  -webkit-text-stroke-width: 0;
+}
+
 #index-button {
   background-color: var(--main-color);
   font-size: 1.5em;
