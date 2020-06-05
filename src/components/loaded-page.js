@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Redirect } from 'react-router-dom'
 import { fetchParkInformation, fetchCampSiteInformation, fetchEVENTInformation } from "../actions";
 
 class LoadedPage extends Component {
@@ -8,17 +9,21 @@ class LoadedPage extends Component {
     const { parkCode } = this.props.match.params;
     this.props.fetchParkInformation(parkCode);
     this.props.fetchCampSiteInformation(parkCode);
-    this.props.fetchCampSiteInformation(parkCode);
-    this.props.fetchEVENTInformation(parkCode,() => console.log(this.props.events));
+    this.props.fetchEVENTInformation(parkCode);
   }
 
-  //call this function when the generate button is clicked
-  // updateNationalPark() {
-  //   const parkCodes = ['shen', 'acad'];
-  //   const parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
-  //   this.props.fetchParkInformation(parkCode);
-  //
-  // }
+  //call this function when the "generate your escape" button is clicked
+  updateNationalPark() {
+    const parkCodes = ["acad", "arch", "badl", "bibe", "bisc", "blca", "brca", "cany", "care", "cave", "chis", "cuva", "drto", "ever", "glac", "grba", "grca", "grsm", "grte", "gumo", "havo", "hosp", "isro", "jotr", "kefj", "kova", "lavo", "maca", "meve", "mora", "noca", "olym", "pefo", "romo", "sagu", "shen", "thro", "viis", "voya", "wica", "yell", "yose", "zion"];
+    const parkCode = parkCodes[Math.floor(Math.random() * parkCodes.length)];
+    this.props.fetchParkInformation(parkCode);
+    this.props.fetchCampSiteInformation(parkCode);
+    this.props.fetchEVENTInformation(parkCode);
+    
+    return (
+      <Redirect to={`/${parkCode}`} />
+    )
+  }
 
   renderLi() {
     if (this.props.events.total === '0') {
@@ -35,7 +40,7 @@ class LoadedPage extends Component {
     }
   }
 
-  renderCampInfo() {
+  renderCampContactInfo() {
     if (this.props.campsite.total === '0') {
       return (
         <div>
@@ -43,15 +48,43 @@ class LoadedPage extends Component {
           <p>Consider AirBnB or find a hotel nearby</p>
         </div>
       )
-    } else {
+    } else if (!this.props.campsite.contacts.phoneNumbers || !this.props.campsite.contacts.phoneNumbers[0] ||!this.props.campsite.contacts.emailAddresses || !this.props.campsite.contacts.emailAddresses[0]  ) {
       return (
         <div>
             <h3>Campsite: {this.props.campsite.name}</h3>
-            <p>The fee for this campsite is ${Number(this.props.campsite.fees[0].cost)}. Contact the campsite at {this.props.campsite.contacts.phoneNumbers[0].phoneNumber} or at {this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
-            <p>{this.props.campsite.fees[0].description} For more information, visit {this.props.campsite.reservationUrl}</p>
+            <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
+        </div>
+      )
+    }  else {
+      return (
+        <div>
+          <h3>Campsite: {this.props.campsite.name}</h3>
+          <p>The fee for this campsite is ${Number(this.props.campsite.fees[0].cost)}. Contact the campsite at {this.props.campsite.contacts.phoneNumbers[0].phoneNumber} or at {this.props.campsite.contacts.emailAddresses[0].emailAddress}</p>
+          <p>To book your campsite, visit {this.props.campsite.reservationUrl}</p>
         </div>
       )
     }
+  }
+
+  renderCampFeeInfo() {
+    if (this.props.campsite.total === '0') {
+      return (
+        <div></div> 
+      )
+    } else if (!this.props.campsite.fees || !this.props.campsite.fees[0] ) {
+      return (
+        <div>
+            <p>No Camp Fees Found</p>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+            <p>Each campsite costs {this.props.campsite.fees[0].cost}</p>
+            <p>{this.props.campsite.fees[0].description}</p>
+        </div>
+      )
+    } 
   }
 
   render() {
@@ -66,7 +99,7 @@ class LoadedPage extends Component {
       <div>
       <nav>
         <p>Escape from 2020</p>
-        <button>Generate Your Escape</button>
+        <button onClick={this.updateNationalPark.bind(this)}>Generate Your Escape</button>
       </nav>
 
         <main>
@@ -81,7 +114,9 @@ class LoadedPage extends Component {
             <p>${Number(this.props.park.entranceFees[0].cost)}</p>
           </div>
           <div id="address" className="module">
-            {this.renderCampInfo()}
+            <h3>Campsite</h3>
+            {this.renderCampContactInfo()}
+            {this.renderCampFeeInfo()}
           </div>
           <div id="hours" className="module">
             <h3>Hours</h3>

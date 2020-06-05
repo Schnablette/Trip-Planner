@@ -1,5 +1,6 @@
 import { FETCH_EVENTS } from '../actions/index';
 
+//this is the events reducer
 export default function(state = null, action) {
   switch (action.type) {
     case FETCH_EVENTS:

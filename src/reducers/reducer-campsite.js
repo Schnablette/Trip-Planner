@@ -1,5 +1,6 @@
 import { FETCH_CAMPSITE } from '../actions/index';
 
+//this is the campsite reducer
 export default function(state = null, action) {
   switch (action.type) {
     case FETCH_CAMPSITE:
