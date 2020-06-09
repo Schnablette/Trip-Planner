@@ -27,10 +27,6 @@ export class MapContainer extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return { park: state.park };
-// }
-
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyASqfYqXSpj9Hmn3hrPiu8RwOXxxmOhyLE'
 })(MapContainer);
